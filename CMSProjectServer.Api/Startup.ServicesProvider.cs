@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using CMSProjectServer.DI;
+using CMSProjectServer.Core.DI;
 using Microsoft.AspNetCore.Builder;
 
-namespace CMSProjectServer;
+namespace CMSProjectServer.Api;
 
 public static partial class Startup
 {

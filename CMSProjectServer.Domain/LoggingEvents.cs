@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace CMSProjectServer;
+﻿namespace CMSProjectServer.Domain;
 
 public static class LoggingEvents
 {

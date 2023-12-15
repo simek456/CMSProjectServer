@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSProjectServer", "CMSProjectServer\CMSProjectServer.csproj", "{5F096E66-980F-4DB4-91A1-A017EE308382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.Api", "CMSProjectServer.Api\CMSProjectServer.Api.csproj", "{5F096E66-980F-4DB4-91A1-A017EE308382}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.Core", "CMSProjectServer.Core\CMSProjectServer.Core.csproj", "{2A75DD15-3C4B-40F8-9126-FD108614B602}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.Domain", "CMSProjectServer.Domain\CMSProjectServer.Domain.csproj", "{FC1B47C2-E9CF-44C8-9651-E58E5D8E0BAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.DAL", "CMSProjectServer.DAL\CMSProjectServer.DAL.csproj", "{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSProjectServer.DAL.Migrations", "CMSProjectServer.DAL.Migrations\CMSProjectServer.DAL.Migrations.csproj", "{A3C76252-E488-48D1-A26B-CE6B2A915CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{5F096E66-980F-4DB4-91A1-A017EE308382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F096E66-980F-4DB4-91A1-A017EE308382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F096E66-980F-4DB4-91A1-A017EE308382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A75DD15-3C4B-40F8-9126-FD108614B602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A75DD15-3C4B-40F8-9126-FD108614B602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A75DD15-3C4B-40F8-9126-FD108614B602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A75DD15-3C4B-40F8-9126-FD108614B602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC1B47C2-E9CF-44C8-9651-E58E5D8E0BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC1B47C2-E9CF-44C8-9651-E58E5D8E0BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC1B47C2-E9CF-44C8-9651-E58E5D8E0BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC1B47C2-E9CF-44C8-9651-E58E5D8E0BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C76252-E488-48D1-A26B-CE6B2A915CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C76252-E488-48D1-A26B-CE6B2A915CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C76252-E488-48D1-A26B-CE6B2A915CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C76252-E488-48D1-A26B-CE6B2A915CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

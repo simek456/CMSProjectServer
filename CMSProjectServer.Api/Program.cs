@@ -1,4 +1,4 @@
-using CMSProjectServer;
+using CMSProjectServer.Api;
 using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);

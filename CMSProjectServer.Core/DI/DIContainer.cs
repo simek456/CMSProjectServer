@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 
-namespace CMSProjectServer.DI;
+namespace CMSProjectServer.Core.DI;
 
 public sealed class DIContainer
 {

@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CMSProjectServer.DAL;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CMSProjectServer;
+namespace CMSProjectServer.Api;
 
 public static partial class Startup
 {

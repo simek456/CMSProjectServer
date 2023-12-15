@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CMSProjectServer.Domain;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 
-namespace CMSProjectServer;
+namespace CMSProjectServer.Api;
 
 public static partial class Startup
 {

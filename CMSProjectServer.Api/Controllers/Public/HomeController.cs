@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CMSProjectServer.Controllers.Public;
+namespace CMSProjectServer.Api.Controllers.Public;
 
 public class HomeController : Controller
 {
