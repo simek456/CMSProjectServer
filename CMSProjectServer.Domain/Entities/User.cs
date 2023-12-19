@@ -17,4 +17,5 @@ public class User
     public IEnumerable<Article> Articles { get; set; }
     public IEnumerable<Like> Like { get; set; }
     public IEnumerable<Comment> Comments { get; set; }
+    public IEnumerable<Site> EditedSites { get; set; }
 }

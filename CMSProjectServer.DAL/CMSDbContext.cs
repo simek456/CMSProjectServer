@@ -11,10 +11,12 @@ public class CMSDbContext : DbContext
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<ArticleTag> Tags { get; set; }
+    public DbSet<Site> CurrentSites { get; set; }
+    public DbSet<Site> HistoricSites { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("TODO: ConnectionString", x => x.MigrationsAssembly("CMSProjectServer.DAL.Migrations"));
+        optionsBuilder.UseNpgsql("Host=localhost;Database=CMSProjectDatabase;Username=CMSProjectServer;Password=CMSProjectServer", x => x.MigrationsAssembly("CMSProjectServer.DAL.Migrations"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,5 +26,6 @@ public class CMSDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CommentEntityBuilder());
         modelBuilder.ApplyConfiguration(new LikeEntityBuilder());
         modelBuilder.ApplyConfiguration(new UserEntityBuilder());
+        modelBuilder.ApplyConfiguration(new SiteEntityBuilder());
     }
 }

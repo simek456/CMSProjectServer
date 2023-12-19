@@ -11,6 +11,6 @@ public class Comment
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-    public User User { get; set; }
+    public User Author { get; set; }
     public Article Article { get; set; }
 }

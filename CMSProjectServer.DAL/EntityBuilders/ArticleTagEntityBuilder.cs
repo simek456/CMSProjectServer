@@ -8,6 +8,6 @@ internal class ArticleTagEntityBuilder : IEntityTypeConfiguration<ArticleTag>
 {
     public void Configure(EntityTypeBuilder<ArticleTag> builder)
     {
-        builder.HasKey(x => new { x.ArticleId, x.Tag });
+        builder.HasKey(x => x.Tag);
     }
 }

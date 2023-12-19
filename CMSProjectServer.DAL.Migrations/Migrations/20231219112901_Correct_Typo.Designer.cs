@@ -3,6 +3,7 @@ using System;
 using CMSProjectServer.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CMSProjectServer.DAL.Migrations
 {
     [DbContext(typeof(CMSDbContext))]
-    partial class CMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219112901_Correct_Typo")]
+    partial class Correct_Typo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,6 +77,9 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Property<string>("Tag")
                         .HasColumnType("text");
 
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Tag");
 
                     b.ToTable("Tags");
@@ -103,11 +109,14 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -125,34 +134,6 @@ namespace CMSProjectServer.DAL.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("Likes");
-                });
-
-            modelBuilder.Entity("CMSProjectServer.Domain.Entities.Site", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ChangeAuthorId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("SiteContent")
-                        .IsRequired()
-                        .HasColumnType("jsonb");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChangeAuthorId");
-
-                    b.ToTable("Site");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.User", b =>
@@ -224,15 +205,15 @@ namespace CMSProjectServer.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CMSProjectServer.Domain.Entities.User", "Author")
+                    b.HasOne("CMSProjectServer.Domain.Entities.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Article");
 
-                    b.Navigation("Author");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Like", b =>
@@ -254,17 +235,6 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CMSProjectServer.Domain.Entities.Site", b =>
-                {
-                    b.HasOne("CMSProjectServer.Domain.Entities.User", "ChangeAuthor")
-                        .WithMany("EditedSites")
-                        .HasForeignKey("ChangeAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChangeAuthor");
-                });
-
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Article", b =>
                 {
                     b.Navigation("Comments");
@@ -277,8 +247,6 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Navigation("Articles");
 
                     b.Navigation("Comments");
-
-                    b.Navigation("EditedSites");
 
                     b.Navigation("Like");
                 });
