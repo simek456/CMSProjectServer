@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using CMSProjectServer.Core.Services;
+using CMSProjectServer.DAL;
 using Microsoft.Extensions.Configuration;
 
 namespace CMSProjectServer.Core.DI;
@@ -23,6 +24,8 @@ public sealed class DIContainer
             builder.RegisterType<AuthService>()
                 .As<IAuthService>()
                 .InstancePerDependency();
+            builder.RegisterType<CMSDbContext>()
+                .InstancePerLifetimeScope();
         }
     }
 }

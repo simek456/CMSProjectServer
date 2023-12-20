@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CMSProjectServer.DAL\CMSProjectServer.DAL.csproj" />
     <ProjectReference Include="..\CMSProjectServer.Domain\CMSProjectServer.Domain.csproj" />
   </ItemGroup>
 

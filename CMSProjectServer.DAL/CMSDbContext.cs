@@ -1,12 +1,12 @@
 ﻿using CMSProjectServer.DAL.EntityBuilders;
 using CMSProjectServer.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CMSProjectServer.DAL;
 
-public class CMSDbContext : DbContext
+public class CMSDbContext : IdentityDbContext<User>
 {
-    public DbSet<User> Users { get; set; }
     public DbSet<Article> Articles { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
@@ -21,6 +21,7 @@ public class CMSDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ArticleTagEntityBuilder());
         modelBuilder.ApplyConfiguration(new ArticleEntityBuilder());
         modelBuilder.ApplyConfiguration(new CommentEntityBuilder());
