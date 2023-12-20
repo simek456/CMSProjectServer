@@ -45,8 +45,8 @@ namespace CMSProjectServer.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("text");
 
                     b.Property<string>("Contents")
                         .IsRequired()
@@ -90,8 +90,8 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Property<int>("ArticleId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("text");
 
                     b.Property<string>("Contents")
                         .IsRequired()
@@ -114,8 +114,8 @@ namespace CMSProjectServer.DAL.Migrations
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Like", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("integer");
@@ -135,8 +135,8 @@ namespace CMSProjectServer.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChangeAuthorId")
-                        .HasColumnType("integer");
+                    b.Property<string>("ChangeAuthorId")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -157,32 +157,58 @@ namespace CMSProjectServer.DAL.Migrations
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("About")
-                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("text");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -209,9 +235,7 @@ namespace CMSProjectServer.DAL.Migrations
                 {
                     b.HasOne("CMSProjectServer.Domain.Entities.User", "Author")
                         .WithMany("Articles")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
                 });
@@ -226,9 +250,7 @@ namespace CMSProjectServer.DAL.Migrations
 
                     b.HasOne("CMSProjectServer.Domain.Entities.User", "Author")
                         .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Article");
 
@@ -258,9 +280,7 @@ namespace CMSProjectServer.DAL.Migrations
                 {
                     b.HasOne("CMSProjectServer.Domain.Entities.User", "ChangeAuthor")
                         .WithMany("EditedSites")
-                        .HasForeignKey("ChangeAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ChangeAuthorId");
 
                     b.Navigation("ChangeAuthor");
                 });

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.DAL", "CMSProjectServer.DAL\CMSProjectServer.DAL.csproj", "{D498F39D-7ECE-4F47-A986-DFCDBAC976B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSProjectServer.DAL.Migrations", "CMSProjectServer.DAL.Migrations\CMSProjectServer.DAL.Migrations.csproj", "{A3C76252-E488-48D1-A26B-CE6B2A915CCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMSProjectServer.DAL.Migrations", "CMSProjectServer.DAL.Migrations\CMSProjectServer.DAL.Migrations.csproj", "{A3C76252-E488-48D1-A26B-CE6B2A915CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

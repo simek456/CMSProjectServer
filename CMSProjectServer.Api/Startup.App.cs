@@ -13,6 +13,7 @@ public static partial class Startup
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.MapControllers();
 
         app.Lifetime.ApplicationStarted.Register(() =>
         {

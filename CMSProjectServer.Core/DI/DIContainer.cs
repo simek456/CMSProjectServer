@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CMSProjectServer.Core.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace CMSProjectServer.Core.DI;
@@ -19,6 +20,9 @@ public sealed class DIContainer
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+            builder.RegisterType<AuthService>()
+                .As<IAuthService>()
+                .InstancePerDependency();
         }
     }
 }

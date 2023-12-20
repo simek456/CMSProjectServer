@@ -12,7 +12,6 @@ public class Site
     public string SiteContent { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public int ChangeAuthorId { get; set; }
 
     public User ChangeAuthor { get; set; }
 }
