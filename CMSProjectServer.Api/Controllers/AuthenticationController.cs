@@ -1,6 +1,7 @@
 ﻿using CMSProjectServer.Core.Services;
 using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -56,6 +57,31 @@ public class AuthenticationController : ControllerBase
             }
 
             var (status, message) = await authService.Registeration(model, UserRoles.User);
+            if (status == 0)
+            {
+                return BadRequest(message);
+            }
+            return CreatedAtAction(nameof(Register), model);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpPost("admin/registration")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<IActionResult> RegisterAdmin(UserRegistrationDto model)
+    {
+        try
+        {
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest("Invalid payload");
+            }
+
+            var (status, message) = await authService.Registeration(model, UserRoles.Admin);
             if (status == 0)
             {
                 return BadRequest(message);
