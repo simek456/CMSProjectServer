@@ -70,7 +70,7 @@ public class AuthenticationController : ControllerBase
         }
     }
 
-    [HttpPost("admin/registration")]
+    [HttpPost("registration/admin")]
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> RegisterAdmin(UserRegistrationDto model)
     {
