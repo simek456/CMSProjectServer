@@ -10,8 +10,8 @@ public class User : IdentityUser
     public string? About { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public IEnumerable<Article> Articles { get; set; }
-    public IEnumerable<Like> Like { get; set; }
-    public IEnumerable<Comment> Comments { get; set; }
-    public IEnumerable<Site> EditedSites { get; set; }
+    public List<Article> Articles { get; set; } = new List<Article>();
+    public List<Like> Like { get; set; } = new List<Like>();
+    public List<Comment> Comments { get; set; } = new List<Comment>();
+    public List<Site> EditedSites { get; set; } = new List<Site>();
 }

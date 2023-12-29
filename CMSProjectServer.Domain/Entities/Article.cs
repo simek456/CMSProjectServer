@@ -7,12 +7,13 @@ public class Article
 {
     public int Id { get; set; }
     public string Title { get; set; }
+    public string Description { get; set; }
     public string Contents { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
     public User Author { get; set; }
-    public IEnumerable<ArticleTag> Tags { get; set; }
-    public IEnumerable<Like> Likes { get; set; }
-    public IEnumerable<Comment> Comments { get; set; }
+    public List<ArticleTag> Tags { get; set; } = new List<ArticleTag>();
+    public List<Like> Likes { get; set; } = new List<Like>();
+    public List<Comment> Comments { get; set; } = new List<Comment>();
 }

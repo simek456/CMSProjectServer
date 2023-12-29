@@ -26,6 +26,9 @@ public sealed class DIContainer
                 .InstancePerDependency();
             builder.RegisterType<CMSDbContext>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ArticleService>()
+                .As<IArticleService>()
+                .InstancePerDependency();
         }
     }
 }

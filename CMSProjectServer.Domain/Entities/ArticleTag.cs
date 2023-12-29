@@ -6,5 +6,5 @@ public class ArticleTag
 {
     public string Tag { get; set; }
 
-    public IEnumerable<Article> Article { get; set; }
+    public List<Article> Article { get; set; } = new List<Article>();
 }
