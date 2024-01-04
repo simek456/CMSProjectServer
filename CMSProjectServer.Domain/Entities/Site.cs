@@ -1,4 +1,5 @@
-﻿using CMSProjectServer.Domain.Entities.SiteContents;
+﻿using CMSProjectServer.Domain.Dto.SiteContents;
+using CMSProjectServer.Domain.Entities.SiteContents;
 using System;
 
 namespace CMSProjectServer.Domain.Entities;
