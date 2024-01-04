@@ -1,12 +1,9 @@
 ﻿using CMSProjectServer.Core.Services;
 using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace CMSProjectServer.Api.Controllers;

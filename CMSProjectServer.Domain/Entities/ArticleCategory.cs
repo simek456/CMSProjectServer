@@ -2,9 +2,10 @@
 
 namespace CMSProjectServer.Domain.Entities;
 
-public class ArticleTag
+public class ArticleCategory
 {
-    public string Tag { get; set; }
+    public int Id { get; set; }
+    public string Category { get; set; }
 
     public List<Article> Article { get; set; } = new List<Article>();
 }

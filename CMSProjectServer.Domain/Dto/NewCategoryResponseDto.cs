@@ -1,6 +1,6 @@
 ﻿namespace CMSProjectServer.Domain.Dto;
 
-public class CreateArticleResponseDto
+public class NewCategoryResponseDto
 {
     public int Id { get; set; }
 }

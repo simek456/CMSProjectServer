@@ -3,6 +3,7 @@ using System;
 using CMSProjectServer.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CMSProjectServer.DAL.Migrations
 {
     [DbContext(typeof(CMSDbContext))]
-    partial class CMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240104122342_Tag_Id")]
+    partial class Tag_Id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,19 +25,19 @@ namespace CMSProjectServer.DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ArticleArticleCategory", b =>
+            modelBuilder.Entity("ArticleArticleTag", b =>
                 {
                     b.Property<int>("ArticleId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CategoriesId")
+                    b.Property<int>("TagsId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ArticleId", "CategoriesId");
+                    b.HasKey("ArticleId", "TagsId");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("TagsId");
 
-                    b.ToTable("ArticleArticleCategory");
+                    b.ToTable("ArticleArticleTag");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Article", b =>
@@ -73,7 +76,7 @@ namespace CMSProjectServer.DAL.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("CMSProjectServer.Domain.Entities.ArticleCategory", b =>
+            modelBuilder.Entity("CMSProjectServer.Domain.Entities.ArticleTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,13 +84,13 @@ namespace CMSProjectServer.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Category")
+                    b.Property<string>("Tag")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Comment", b =>
@@ -243,16 +246,16 @@ namespace CMSProjectServer.DAL.Migrations
                         {
                             Id = "b7ad606a-2f3d-4ff5-89f4-278100d10b85",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d51e6aa3-be26-4eaf-87b9-d036fc9ef5db",
+                            ConcurrencyStamp = "614fae53-cce3-401e-b805-78a197c116db",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "FirstAdmin",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHT7g2nfmVzsxqoHQ1HbQyVn1Oa7fD5Mp6F8SWWluUK4yWRKDHf+Df/l1tZjx7hF3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELMA+Gttx2MlbX1wLOCgOL9sSjBxVrgdI/QtMhsGugoRzq/WpT+dJ0z9ahDXFdGsow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b47277f6-654f-4ae1-acdf-f09d2699b35f",
+                            SecurityStamp = "b2a95b64-5b4d-4e57-8136-2f8f8e56e8b6",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -406,7 +409,7 @@ namespace CMSProjectServer.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ArticleArticleCategory", b =>
+            modelBuilder.Entity("ArticleArticleTag", b =>
                 {
                     b.HasOne("CMSProjectServer.Domain.Entities.Article", null)
                         .WithMany()
@@ -414,9 +417,9 @@ namespace CMSProjectServer.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CMSProjectServer.Domain.Entities.ArticleCategory", null)
+                    b.HasOne("CMSProjectServer.Domain.Entities.ArticleTag", null)
                         .WithMany()
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

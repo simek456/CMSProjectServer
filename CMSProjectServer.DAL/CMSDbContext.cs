@@ -11,7 +11,7 @@ public class CMSDbContext : IdentityDbContext<User>
     public DbSet<Article> Articles { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
-    public DbSet<ArticleTag> Tags { get; set; }
+    public DbSet<ArticleCategory> Categories { get; set; }
     public DbSet<Site> CurrentSites { get; set; }
     public DbSet<Site> HistoricSites { get; set; }
 
@@ -23,7 +23,7 @@ public class CMSDbContext : IdentityDbContext<User>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new ArticleTagEntityBuilder());
+        modelBuilder.ApplyConfiguration(new ArticleCategoryEntityBuilder());
         modelBuilder.ApplyConfiguration(new ArticleEntityBuilder());
         modelBuilder.ApplyConfiguration(new CommentEntityBuilder());
         modelBuilder.ApplyConfiguration(new LikeEntityBuilder());

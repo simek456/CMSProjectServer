@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMSProjectServer.Core.Services;
@@ -29,7 +28,7 @@ internal class ArticleService : IArticleService
         }
         return new ArticleDto()
         {
-            Categories = result.Tags.Select(x => x.Tag).ToList(),
+            Categories = result.Categories.Select(x => x.Category).ToList(),
             Contents = result.Contents,
             Description = result.Description,
             Title = result.Title,
@@ -57,15 +56,15 @@ internal class ArticleService : IArticleService
 
         dbContext.Add(newArticle);
 
-        var existingTags = await dbContext.Tags.Where(x => articleDto.Categories.Contains(x.Tag)).ToListAsync();
-        foreach (var newTag in articleDto.Categories.Where(x => existingTags.Any(e => e.Tag == x) == false))
+        var existingCategories = await dbContext.Categories.Where(x => articleDto.Categories.Contains(x.Category)).ToListAsync();
+        foreach (var newCategory in articleDto.Categories.Where(x => existingCategories.Any(e => e.Category == x) == false))
         {
-            var tag = new ArticleTag() { Tag = newTag };
-            newArticle.Tags.Add(tag);
+            var tag = new ArticleCategory() { Category = newCategory };
+            newArticle.Categories.Add(tag);
         }
-        foreach (var existingTag in existingTags)
+        foreach (var existingCategory in existingCategories)
         {
-            newArticle.Tags.Add(existingTag);
+            newArticle.Categories.Add(existingCategory);
         }
 
         await dbContext.SaveChangesAsync();
@@ -75,7 +74,7 @@ internal class ArticleService : IArticleService
 
     public async Task<Result<CreateArticleResponseDto>> UpdateArticle(ArticleDto articleDto, string authorUsername)
     {
-        var editedArticle = await dbContext.Articles.Include(x => x.Tags).Include(x => x.Author).FirstOrDefaultAsync(x => x.Id == articleDto.Id);
+        var editedArticle = await dbContext.Articles.Include(x => x.Categories).Include(x => x.Author).FirstOrDefaultAsync(x => x.Id == articleDto.Id);
         if (editedArticle == null)
         {
             return Result<CreateArticleResponseDto>.Failure("Article doen't exist");
@@ -89,21 +88,21 @@ internal class ArticleService : IArticleService
         editedArticle.Contents = articleDto.Contents;
         editedArticle.Description = articleDto.Description;
         editedArticle.UpdatedAt = DateTime.UtcNow;
-        editedArticle.Tags.RemoveAll(x => articleDto.Categories.Contains(x.Tag) == false);
-        var tagsToAdd = articleDto.Categories.Where(x => editedArticle.Tags.Any(e => e.Tag == x) == false).ToList();
+        editedArticle.Categories.RemoveAll(x => articleDto.Categories.Contains(x.Category) == false);
+        var tagsToAdd = articleDto.Categories.Where(x => editedArticle.Categories.Any(e => e.Category == x) == false).ToList();
 
-        var existingTags = await dbContext.Tags.Where(x => tagsToAdd.Contains(x.Tag)).ToListAsync();
-        foreach (var newTag in tagsToAdd.Where(x => existingTags.Any(e => e.Tag == x) == false))
+        var existingCategories = await dbContext.Categories.Where(x => tagsToAdd.Contains(x.Category)).ToListAsync();
+        foreach (var newCategory in tagsToAdd.Where(x => existingCategories.Any(e => e.Category == x) == false))
         {
-            var tag = new ArticleTag() { Tag = newTag };
+            var tag = new ArticleCategory() { Category = newCategory };
             tag.Article.Add(editedArticle);
-            editedArticle.Tags.Add(tag);
-            dbContext.Tags.Add(tag);
+            editedArticle.Categories.Add(tag);
+            dbContext.Categories.Add(tag);
         }
-        foreach (var existingTag in existingTags)
+        foreach (var existingCategory in existingCategories)
         {
-            existingTag.Article.Add(editedArticle);
-            editedArticle.Tags.Add(existingTag);
+            existingCategory.Article.Add(editedArticle);
+            editedArticle.Categories.Add(existingCategory);
         }
 
         await dbContext.SaveChangesAsync();

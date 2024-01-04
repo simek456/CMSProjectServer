@@ -3,6 +3,7 @@ using System;
 using CMSProjectServer.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CMSProjectServer.DAL.Migrations
 {
     [DbContext(typeof(CMSDbContext))]
-    partial class CMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240104140905_Unify_Name")]
+    partial class Unify_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +30,12 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Property<int>("ArticleId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CategoriesId")
+                    b.Property<int>("TagsId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ArticleId", "CategoriesId");
+                    b.HasKey("ArticleId", "TagsId");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("TagsId");
 
                     b.ToTable("ArticleArticleCategory");
                 });
@@ -243,16 +246,16 @@ namespace CMSProjectServer.DAL.Migrations
                         {
                             Id = "b7ad606a-2f3d-4ff5-89f4-278100d10b85",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d51e6aa3-be26-4eaf-87b9-d036fc9ef5db",
+                            ConcurrencyStamp = "7ac455fc-a0cb-405b-9420-18a455678806",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "FirstAdmin",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHT7g2nfmVzsxqoHQ1HbQyVn1Oa7fD5Mp6F8SWWluUK4yWRKDHf+Df/l1tZjx7hF3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK8PtVox52DdyMnpTsnt/z1RMY2k2aa5qBFzuDRDLNXMUJUtar9B3+MgwTQvptiaFw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b47277f6-654f-4ae1-acdf-f09d2699b35f",
+                            SecurityStamp = "1b3bf205-89e4-429c-99d3-7f38d028aa43",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -416,7 +419,7 @@ namespace CMSProjectServer.DAL.Migrations
 
                     b.HasOne("CMSProjectServer.Domain.Entities.ArticleCategory", null)
                         .WithMany()
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
