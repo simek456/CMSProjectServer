@@ -31,6 +31,7 @@ public class SiteController : ControllerBase
     }
 
     [HttpPost("{siteId}")]
+    [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> SaveSite([FromRoute] string siteId, [FromBody] SiteDto siteDto)
     {
         var username = User?.Identity?.Name;
@@ -40,5 +41,25 @@ public class SiteController : ControllerBase
         }
         await siteService.AddSite(siteDto, siteId, username);
         return NoContent();
+    }
+
+    [HttpDelete("{siteId}")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<IActionResult> SaveSite([FromRoute] string siteId)
+    {
+        var username = User?.Identity?.Name;
+        if (username is null)
+        {
+            return BadRequest("Unknown User");
+        }
+        await siteService.DeleteSite(siteId);
+        return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllSites()
+    {
+        var siteList = siteService.GetAllSites();
+        return Ok(siteList);
     }
 }

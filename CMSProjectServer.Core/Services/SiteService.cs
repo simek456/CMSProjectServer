@@ -49,13 +49,36 @@ internal class SiteService : ISiteService
         {
             siteEntity.UpdatedAt = DateTime.UtcNow;
             siteEntity.CreatedAt = oldSite.CreatedAt;
-            var maxId = await dbContext.HistoricSites.Select(x => x.Id).MaxAsync(x => x);
-            oldSite.Id = maxId + 1;
-            dbContext.HistoricSites.Add(mapper.Map<OldSite>(oldSite));
+            await AddHistoricSite(oldSite);
             dbContext.CurrentSites.Remove(oldSite);
         }
 
         dbContext.CurrentSites.Add(siteEntity);
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task AddHistoricSite(Site oldSite)
+    {
+        var maxId = await dbContext.HistoricSites.Select(x => x.Id).MaxAsync(x => x);
+        oldSite.Id = maxId + 1;
+        dbContext.HistoricSites.Add(mapper.Map<OldSite>(oldSite));
+    }
+
+    public async Task<List<string>> GetAllSites()
+    {
+        var siteList = await dbContext.CurrentSites.Select(x => x.Name).ToListAsync();
+        return siteList;
+    }
+
+    public async Task DeleteSite(string siteId)
+    {
+        var site = await dbContext.CurrentSites.FirstOrDefaultAsync(x => x.Name.Equals(siteId));
+        if (site == null)
+        {
+            return;
+        }
+        await AddHistoricSite(site);
+        dbContext.CurrentSites.Remove(site);
         await dbContext.SaveChangesAsync();
     }
 }
