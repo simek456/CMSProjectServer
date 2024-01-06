@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Api.Controllers;
 
-[Authorize(Roles = UserRoles.Admin)]
-[Authorize(Roles = UserRoles.User)]
+[Authorize(Roles = UserRoles.User + "," + UserRoles.Admin)]
 [Route("api/likes")]
 public class LikeController : ControllerBase
 {

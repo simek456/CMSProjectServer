@@ -45,25 +45,20 @@ internal class ArticleService : IArticleService
         {
             return Result<CreateArticleResponseDto>.Failure("User doesn't exist");
         }
+        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.Category);
+        if (category == null)
+        {
+            return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");
+        }
         var newArticle = new Article();
         newArticle.Title = articleDto.Title;
         newArticle.Contents = articleDto.Contents;
         newArticle.Description = articleDto.Description;
         newArticle.CreatedAt = DateTime.UtcNow;
         newArticle.Author = author;
+        newArticle.Category = category;
 
         dbContext.Add(newArticle);
-
-        var existingCategories = await dbContext.Categories.Where(x => articleDto.Categories.Contains(x.Category)).ToListAsync();
-        foreach (var newCategory in articleDto.Categories.Where(x => existingCategories.Any(e => e.Category == x) == false))
-        {
-            var tag = new ArticleCategory() { Category = newCategory };
-            newArticle.Categories.Add(tag);
-        }
-        foreach (var existingCategory in existingCategories)
-        {
-            newArticle.Categories.Add(existingCategory);
-        }
 
         await dbContext.SaveChangesAsync();
 
@@ -72,7 +67,7 @@ internal class ArticleService : IArticleService
 
     public async Task<Result<CreateArticleResponseDto>> UpdateArticle(ArticleDto articleDto, string authorUsername)
     {
-        var editedArticle = await dbContext.Articles.Include(x => x.Categories).Include(x => x.Author).FirstOrDefaultAsync(x => x.Id == articleDto.Id);
+        var editedArticle = await dbContext.Articles.Include(x => x.Category).Include(x => x.Author).FirstOrDefaultAsync(x => x.Id == articleDto.Id);
         if (editedArticle == null)
         {
             return Result<CreateArticleResponseDto>.Failure("Article doen't exist");
@@ -81,27 +76,17 @@ internal class ArticleService : IArticleService
         {
             return Result<CreateArticleResponseDto>.Failure("You are not the author");
         }
+        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.Category);
+        if (category == null)
+        {
+            return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");
+        }
 
         editedArticle.Title = articleDto.Title;
         editedArticle.Contents = articleDto.Contents;
         editedArticle.Description = articleDto.Description;
         editedArticle.UpdatedAt = DateTime.UtcNow;
-        editedArticle.Categories.RemoveAll(x => articleDto.Categories.Contains(x.Category) == false);
-        var tagsToAdd = articleDto.Categories.Where(x => editedArticle.Categories.Any(e => e.Category == x) == false).ToList();
-
-        var existingCategories = await dbContext.Categories.Where(x => tagsToAdd.Contains(x.Category)).ToListAsync();
-        foreach (var newCategory in tagsToAdd.Where(x => existingCategories.Any(e => e.Category == x) == false))
-        {
-            var tag = new ArticleCategory() { Category = newCategory };
-            tag.Article.Add(editedArticle);
-            editedArticle.Categories.Add(tag);
-            dbContext.Categories.Add(tag);
-        }
-        foreach (var existingCategory in existingCategories)
-        {
-            existingCategory.Article.Add(editedArticle);
-            editedArticle.Categories.Add(existingCategory);
-        }
+        editedArticle.Category = category;
 
         await dbContext.SaveChangesAsync();
 

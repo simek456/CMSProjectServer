@@ -13,7 +13,7 @@ public class Article
     public DateTime? UpdatedAt { get; set; }
 
     public User Author { get; set; }
-    public List<ArticleCategory> Categories { get; set; } = new List<ArticleCategory>();
+    public ArticleCategory Category { get; set; }
     public List<Like> Likes { get; set; } = new List<Like>();
     public List<Comment> Comments { get; set; } = new List<Comment>();
 }

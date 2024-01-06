@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Api.Controllers;
 
-[Authorize(Roles = UserRoles.User)]
-[Authorize(Roles = UserRoles.Admin)]
+[Authorize(Roles = UserRoles.User + "," + UserRoles.Admin)]
 [Route("api/categories")]
 public class CategoryController : ControllerBase
 {
@@ -29,7 +28,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateArticle([FromBody] NewCategoryDto newCategory)
+    public async Task<IActionResult> CreateCategory([FromBody] NewCategoryDto newCategory)
     {
         var result = await categoriesService.AddCategory(newCategory.Category);
         return Ok(result);
@@ -37,7 +36,7 @@ public class CategoryController : ControllerBase
 
     [HttpDelete()]
     [Authorize(Roles = UserRoles.Admin)]
-    public async Task<IActionResult> DeleteArticles([FromQuery] List<int> categoryIds)
+    public async Task<IActionResult> DeleteCategory([FromQuery] List<int> categoryIds)
     {
         await categoriesService.DeleteCategories(categoryIds);
         return Ok();
