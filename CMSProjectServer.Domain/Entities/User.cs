@@ -11,7 +11,7 @@ public class User : IdentityUser
     public DateTime CreatedAt { get; set; }
 
     public List<Article> Articles { get; set; } = new List<Article>();
-    public List<Like> Like { get; set; } = new List<Like>();
+    public List<Like> Likes { get; set; } = new List<Like>();
     public List<Comment> Comments { get; set; } = new List<Comment>();
     public List<Site> EditedSites { get; set; } = new List<Site>();
 }

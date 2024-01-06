@@ -1,4 +1,5 @@
-﻿using CMSProjectServer.DAL;
+﻿using AutoMapper;
+using CMSProjectServer.DAL;
 using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
 using CMSProjectServer.Domain.Entities;
@@ -13,27 +14,24 @@ namespace CMSProjectServer.Core.Services;
 internal class ArticleService : IArticleService
 {
     private readonly CMSDbContext dbContext;
+    private readonly IMapper mapper;
 
-    public ArticleService(CMSDbContext dbContext)
+    public ArticleService(CMSDbContext dbContext, IMapper mapper)
     {
         this.dbContext = dbContext;
+        this.mapper = mapper;
     }
 
     public async Task<Result<ArticleDto>> GetArticleById(int id)
     {
-        var result = await dbContext.Articles.FirstOrDefaultAsync(a => a.Id == id);
+        var result = await dbContext.Articles.Include(x => x.Likes).FirstOrDefaultAsync(a => a.Id == id);
         if (result == null)
         {
             return Result<ArticleDto>.Failure();
         }
-        return new ArticleDto()
-        {
-            Categories = result.Categories.Select(x => x.Category).ToList(),
-            Contents = result.Contents,
-            Description = result.Description,
-            Title = result.Title,
-            Id = id
-        };
+        var article = mapper.Map<ArticleDto>(result);
+        article.LikeCount = result.Likes.Count;
+        return article;
     }
 
     public async Task<Result<CreateArticleResponseDto>> CreateArticle(ArticleDto articleDto, string authorUsername)

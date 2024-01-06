@@ -9,4 +9,5 @@ public class ArticleDto
     public string Contents { get; set; }
     public string Description { get; set; }
     public List<string> Categories { get; set; } = new List<string>();
+    public int LikeCount { get; set; }
 }

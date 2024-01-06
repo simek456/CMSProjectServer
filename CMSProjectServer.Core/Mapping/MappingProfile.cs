@@ -27,5 +27,6 @@ public class MappingProfile : Profile
         CreateMap<Row, RowDto>().ReverseMap();
         CreateMap<Site, SiteDto>().ReverseMap();
         CreateMap<Site, OldSite>().ReverseMap();
+        CreateMap<Article, ArticleDto>().ReverseMap();
     }
 }

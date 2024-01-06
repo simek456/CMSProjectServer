@@ -9,5 +9,6 @@ internal class UserEntityBuilder : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.UserName);
     }
 }
