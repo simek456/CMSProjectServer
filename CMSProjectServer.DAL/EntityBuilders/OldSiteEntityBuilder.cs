@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CMSProjectServer.DAL.EntityBuilders;
 
-internal class SiteEntityBuilder : IEntityTypeConfiguration<Site>
+internal class OldSiteEntityBuilder : IEntityTypeConfiguration<OldSite>
 {
-    public void Configure(EntityTypeBuilder<Site> builder)
+    public void Configure(EntityTypeBuilder<OldSite> builder)
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.SiteContent)

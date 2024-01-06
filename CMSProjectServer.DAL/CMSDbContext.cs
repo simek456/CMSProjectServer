@@ -13,7 +13,7 @@ public class CMSDbContext : IdentityDbContext<User>
     public DbSet<Comment> Comments { get; set; }
     public DbSet<ArticleCategory> Categories { get; set; }
     public DbSet<Site> CurrentSites { get; set; }
-    public DbSet<Site> HistoricSites { get; set; }
+    public DbSet<OldSite> HistoricSites { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -29,6 +29,7 @@ public class CMSDbContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new LikeEntityBuilder());
         modelBuilder.ApplyConfiguration(new UserEntityBuilder());
         modelBuilder.ApplyConfiguration(new SiteEntityBuilder());
+        modelBuilder.ApplyConfiguration(new OldSiteEntityBuilder());
         SeedInitialAdmin(modelBuilder);
     }
 

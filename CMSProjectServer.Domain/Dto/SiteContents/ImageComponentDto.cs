@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Domain.Dto.SiteContents;
 
-public class ImageComponent : BaseComponentDto
+public class ImageComponentDto : BaseComponentDto
 {
     public string? imgPath { get; set; }
     public string? description { get; set; }

@@ -32,6 +32,9 @@ public sealed class DIContainer
             builder.RegisterType<CategoriesService>()
                 .As<ICategoriesService>()
                 .InstancePerDependency();
+            builder.RegisterType<SiteService>()
+                .As<ISiteService>()
+                .InstancePerDependency();
         }
     }
 }

@@ -4,6 +4,7 @@ using CMSProjectServer.DAL;
 using CMSProjectServer.Domain.Entities.SiteContents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CMSProjectServer.DAL.Migrations
 {
     [DbContext(typeof(CMSDbContext))]
-    partial class CMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240106005102_SiteName")]
+    partial class SiteName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,40 +142,6 @@ namespace CMSProjectServer.DAL.Migrations
                     b.ToTable("Likes");
                 });
 
-            modelBuilder.Entity("CMSProjectServer.Domain.Entities.OldSite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ChangeAuthorId")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Contents>("SiteContent")
-                        .IsRequired()
-                        .HasColumnType("jsonb");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChangeAuthorId");
-
-                    b.HasIndex("Name");
-
-                    b.ToTable("HistoricSites");
-                });
-
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Site", b =>
                 {
                     b.Property<int>("Id")
@@ -204,7 +173,7 @@ namespace CMSProjectServer.DAL.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("CurrentSites");
+                    b.ToTable("Site");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.User", b =>
@@ -284,16 +253,16 @@ namespace CMSProjectServer.DAL.Migrations
                         {
                             Id = "b7ad606a-2f3d-4ff5-89f4-278100d10b85",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e849f86e-2ee0-4685-b8cf-21d5d458e053",
+                            ConcurrencyStamp = "65623ab1-2c54-42f7-87eb-63f10b5388dc",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "FirstAdmin",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDzz/dV3l0Vko5YkskDg6v+H00GeGWy9AC3uZ8RE9JweGj3qT6chA+cMVV7WrZTHqA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECy72LmErlwb1py1SQurZE7pmaKAeg23QYbIZYtmAygtKz/NhhxkZQUAQD1k1FVICA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "21e13cf9-56d3-4e36-99af-17bafe0ef3b9",
+                            SecurityStamp = "f0798db1-4a9f-4e1f-88b7-0cb5ac23abd3",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -505,15 +474,6 @@ namespace CMSProjectServer.DAL.Migrations
                     b.Navigation("Article");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CMSProjectServer.Domain.Entities.OldSite", b =>
-                {
-                    b.HasOne("CMSProjectServer.Domain.Entities.User", "ChangeAuthor")
-                        .WithMany()
-                        .HasForeignKey("ChangeAuthorId");
-
-                    b.Navigation("ChangeAuthor");
                 });
 
             modelBuilder.Entity("CMSProjectServer.Domain.Entities.Site", b =>

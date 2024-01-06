@@ -4,7 +4,7 @@ using System;
 
 namespace CMSProjectServer.Domain.Entities;
 
-public class Site
+public class OldSite
 {
     public int Id { get; set; }
     public string Name { get; set; }
