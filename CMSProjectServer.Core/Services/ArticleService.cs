@@ -24,13 +24,24 @@ internal class ArticleService : IArticleService
 
     public async Task<Result<ArticleDto>> GetArticleById(int id)
     {
-        var result = await dbContext.Articles.Include(x => x.Likes).FirstOrDefaultAsync(a => a.Id == id);
+        var result = await dbContext.Articles.Include(x => x.Likes).Include(x => x.Category).FirstOrDefaultAsync(a => a.Id == id);
         if (result == null)
         {
             return Result<ArticleDto>.Failure();
         }
         var article = mapper.Map<ArticleDto>(result);
         article.LikeCount = result.Likes.Count;
+        return article;
+    }
+
+    public async Task<Result<ArticleShortDto>> GetArticleShortById(int id)
+    {
+        var result = await dbContext.Articles.Include(x => x.Author).Include(x => x.Category).FirstOrDefaultAsync(a => a.Id == id);
+        if (result == null)
+        {
+            return Result<ArticleShortDto>.Failure();
+        }
+        var article = mapper.Map<ArticleShortDto>(result);
         return article;
     }
 
@@ -45,7 +56,7 @@ internal class ArticleService : IArticleService
         {
             return Result<CreateArticleResponseDto>.Failure("User doesn't exist");
         }
-        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.Category);
+        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.CategoryId);
         if (category == null)
         {
             return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");
@@ -76,7 +87,7 @@ internal class ArticleService : IArticleService
         {
             return Result<CreateArticleResponseDto>.Failure("You are not the author");
         }
-        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.Category);
+        var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.CategoryId);
         if (category == null)
         {
             return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");

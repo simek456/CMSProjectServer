@@ -27,6 +27,12 @@ public class MappingProfile : Profile
         CreateMap<Row, RowDto>().ReverseMap();
         CreateMap<Site, SiteDto>().ReverseMap();
         CreateMap<Site, OldSite>().ReverseMap();
-        CreateMap<Article, ArticleDto>().ReverseMap();
+        CreateMap<Article, ArticleDto>()
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(x => x.Category.Id))
+            .ReverseMap();
+        CreateMap<Article, ArticleShortDto>()
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(x => x.Category.Id))
+            .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(x => x.Author.Id))
+            .ReverseMap();
     }
 }

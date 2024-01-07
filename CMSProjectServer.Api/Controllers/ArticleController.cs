@@ -30,6 +30,17 @@ public class ArticleController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("{id}/short")]
+    public async Task<IActionResult> GetArticleShort([FromRoute] int id)
+    {
+        var result = await articleService.GetArticleShortById(id);
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+        return NotFound();
+    }
+
     [HttpPost()]
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> CreateArticle([FromBody] ArticleDto articleDto)

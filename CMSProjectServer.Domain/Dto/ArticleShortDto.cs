@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CMSProjectServer.Domain.Dto;
 
-public class ArticleDto
+public class ArticleShortDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
-    public string Contents { get; set; }
     public string Description { get; set; }
+    public DateTime CreatedAt { get; set; }
     public int CategoryId { get; set; }
-    public int LikeCount { get; set; }
+    public Guid AuthorId { get; set; }
 }
