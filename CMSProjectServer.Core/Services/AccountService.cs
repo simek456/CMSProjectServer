@@ -14,12 +14,12 @@ namespace CMSProjectServer.Core.Services;
 internal class AccountService : IAccountService
 {
     private readonly UserManager<User> userManager;
-    private readonly RoleManager<IdentityRole> roleManager;
+    private readonly CMSDbContext dbContext;
 
-    public AccountService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    public AccountService(UserManager<User> userManager, CMSDbContext dbContext)
     {
         this.userManager = userManager;
-        this.roleManager = roleManager;
+        this.dbContext = dbContext;
     }
 
     public async Task<Result<bool>> DeleteAccount(string username)
@@ -49,5 +49,27 @@ internal class AccountService : IAccountService
             return Result<bool>.Failure("You can't delete your account this way");
         }
         return await DeleteAccount(targetUsername);
+    }
+
+    public async Task<Result<List<string>>> GetAccountList(string? targetRole = null)
+    {
+        if (targetRole == null)
+        {
+            return await dbContext.Users.Select(x => x.UserName).ToListAsync();
+        }
+        IList<User> users;
+        switch (targetRole)
+        {
+            case UserRoles.Admin:
+                users = await userManager.GetUsersInRoleAsync(UserRoles.Admin);
+                return users.Select(x => x.UserName).ToList();
+
+            case UserRoles.User:
+                users = await userManager.GetUsersInRoleAsync(UserRoles.User);
+                return users.Select(x => x.UserName).ToList();
+
+            default:
+                return Result<List<string>>.Failure("Unknown role");
+        }
     }
 }

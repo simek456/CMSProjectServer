@@ -49,4 +49,21 @@ public class AccountController : ControllerBase
         }
         return BadRequest(result.Error);
     }
+
+    [HttpGet("list")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public async Task<IActionResult> GetAccountList([FromQuery] string? targetRole = null)
+    {
+        var username = User?.Identity?.Name;
+        if (username is null)
+        {
+            return BadRequest("Unknown User");
+        }
+        var result = await accountService.GetAccountList(targetRole);
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+        return BadRequest(result.Error);
+    }
 }
