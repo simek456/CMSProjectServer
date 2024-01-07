@@ -110,4 +110,76 @@ internal class ArticleService : IArticleService
         dbContext.RemoveRange(articlesToDelete);
         await dbContext.SaveChangesAsync();
     }
+
+    public async Task<ArticleIdNameMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    {
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
+            .Select(x => new { Id = x.Id, Name = x.Title })
+            .ToListAsync();
+        var result = new ArticleIdNameMapDto();
+        foreach (var article in articleList)
+        {
+            result.Articles.Add(article.Id, article.Name);
+        }
+        return result;
+    }
+
+    public async Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    {
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
+            .ToListAsync();
+        var result = new ArticleListDto()
+        {
+            Articles = articleList.Select(x => mapper.Map<ArticleShortDto>(x)).ToList(),
+        };
+        return result;
+    }
+
+    private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    {
+        IQueryable<Article> query = dbContext.Articles;
+
+        if (categoryId != null)
+        {
+            query = query.Where(x => x.Category.Id == categoryId);
+        }
+        if (authorId != null)
+        {
+            query = query.Where(x => x.Author.Id == authorId);
+        }
+        if (page != null)
+        {
+            query = query.Skip(pageSize * page.Value);
+        }
+        query = query.Take(pageSize);
+        switch (order)
+        {
+            case SortingType.NameDescending:
+                query = query.OrderByDescending(x => x.Title);
+                break;
+
+            case SortingType.NameAscending:
+                query = query.OrderBy(x => x.Title);
+                break;
+
+            case SortingType.TimeDescending:
+                query = query.OrderByDescending(x => x.CreatedAt);
+                break;
+
+            case SortingType.TimeAscending:
+                query = query.OrderBy(x => x.CreatedAt);
+                break;
+
+            case SortingType.LikeDescending:
+                query = query.OrderByDescending(x => x.Likes.Count);
+                break;
+
+            case SortingType.LikeAscending:
+                query = query.OrderBy(x => x.Likes.Count);
+                break;
+
+            default: break;
+        }
+        return query;
+    }
 }

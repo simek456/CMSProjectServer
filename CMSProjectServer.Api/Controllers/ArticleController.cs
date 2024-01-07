@@ -85,4 +85,36 @@ public class ArticleController : ControllerBase
         await articleService.DeleteArticles(articleIds);
         return Ok();
     }
+
+    [HttpGet("id-tile-map/{pageSize}")]
+    public async Task<IActionResult> GetArticleListMap([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId)
+    {
+        if (!ValidSorting(order))
+        {
+            return BadRequest("Incorrect Sorting type");
+        }
+
+        var result = await articleService.GetArticleIdNameMap(pageSize, page, categoryId, order, authorId);
+        return Ok(result);
+    }
+
+    [HttpGet("list/{pageSize}")]
+    public async Task<IActionResult> GetArticleListShort([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId)
+    {
+        if (!ValidSorting(order))
+        {
+            return BadRequest("Incorrect Sorting type");
+        }
+        var result = await articleService.GetArticleListShort(pageSize, page, categoryId, order, authorId);
+        return Ok(result);
+    }
+
+    private bool ValidSorting(string? sorting)
+    {
+        if (sorting == null)
+        {
+            return true;
+        }
+        return SortingType.AvailableSortings.Contains(sorting);
+    }
 }

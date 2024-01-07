@@ -13,6 +13,10 @@ public interface IArticleService
 
     Task<Result<ArticleDto>> GetArticleById(int id);
 
+    Task<ArticleIdNameMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId);
+
+    Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId);
+
     Task<Result<ArticleShortDto>> GetArticleShortById(int id);
 
     Task<Result<CreateArticleResponseDto>> UpdateArticle(ArticleDto articleDto, string authorUsername);
