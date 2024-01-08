@@ -86,7 +86,7 @@ public class ArticleController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("id-tile-map/{pageSize}")]
+    [HttpGet("id-title-map/{pageSize}")]
     public async Task<IActionResult> GetArticleListMap([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId)
     {
         if (!ValidSorting(order))
