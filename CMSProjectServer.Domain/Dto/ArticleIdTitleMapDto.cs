@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Domain.Dto;
 
-public class ArticleIdNameMapDto
+public class ArticleIdTitleMapDto
 {
-    public List<(int, string)> Articles { get; set; } = new List<(int, string)>();
+    public List<IdTitlePairDto> Articles { get; set; } = new List<IdTitlePairDto>();
 }

@@ -111,16 +111,15 @@ internal class ArticleService : IArticleService
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<ArticleIdNameMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    public async Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId)
     {
         var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
-            .Select(x => new { Id = x.Id, Name = x.Title })
+            .Select(x => new IdTitlePairDto() { Id = x.Id, Title = x.Title })
             .ToListAsync();
-        var result = new ArticleIdNameMapDto();
-        foreach (var article in articleList)
+        var result = new ArticleIdTitleMapDto()
         {
-            result.Articles.Add((article.Id, article.Name));
-        }
+            Articles = articleList,
+        };
         return result;
     }
 
