@@ -58,7 +58,7 @@ public static partial class Startup
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile<MappingProfile>();
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

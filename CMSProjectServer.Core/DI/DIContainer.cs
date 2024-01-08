@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CMSProjectServer.Core.Mapping;
 using CMSProjectServer.Core.Services;
 using CMSProjectServer.DAL;
 using Microsoft.Extensions.Configuration;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Domain.Dto.SiteContents;
 
-public class BlockComponentDto
+public class BlockComponentDto : BaseComponentDto
 {
     public string Text { get; set; }
     public decimal FontSize { get; set; }

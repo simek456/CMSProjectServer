@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CMSProjectServer.Core.Mapping;
 
@@ -20,7 +21,10 @@ public class MappingProfile : Profile
         CreateMap<BlockComponent, BlockComponentDto>().ReverseMap();
         CreateMap<Contents, ContentsDto>().ReverseMap();
         CreateMap<Footer, FooterDto>().ReverseMap();
-        CreateMap<Grid, GridDto>().ReverseMap();
+        CreateMap<Grid, GridDto>()
+            .ForMember(dest => dest.Components, opt => opt.MapFrom<ComponentResolver>())
+            .ReverseMap()
+            .ForMember(dest => dest.Components, opt => opt.MapFrom<ComponentResolverReverse>());
         CreateMap<Header, HeaderDto>().ReverseMap();
         CreateMap<ImageComponent, ImageComponentDto>().ReverseMap();
         CreateMap<MenuItem, MenuItemDto>().ReverseMap();
