@@ -119,7 +119,7 @@ internal class ArticleService : IArticleService
         var result = new ArticleIdNameMapDto();
         foreach (var article in articleList)
         {
-            result.Articles.Add(article.Id, article.Name);
+            result.Articles.Add((article.Id, article.Name));
         }
         return result;
     }

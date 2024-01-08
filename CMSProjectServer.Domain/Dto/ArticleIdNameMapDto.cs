@@ -8,5 +8,5 @@ namespace CMSProjectServer.Domain.Dto;
 
 public class ArticleIdNameMapDto
 {
-    public Dictionary<int, string> Articles { get; set; } = new Dictionary<int, string>();
+    public List<(int, string)> Articles { get; set; } = new List<(int, string)>();
 }
