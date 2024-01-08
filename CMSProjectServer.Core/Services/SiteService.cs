@@ -60,8 +60,6 @@ internal class SiteService : ISiteService
 
     private async Task AddHistoricSite(Site oldSite)
     {
-        var maxId = await dbContext.HistoricSites.Select(x => x.Id).MaxAsync(x => x);
-        oldSite.Id = maxId + 1;
         dbContext.HistoricSites.Add(mapper.Map<OldSite>(oldSite));
     }
 

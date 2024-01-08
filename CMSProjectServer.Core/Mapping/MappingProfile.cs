@@ -29,7 +29,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Site, opt => opt.MapFrom(x => x.SiteContent))
             .ReverseMap()
             .ForMember(dest => dest.SiteContent, opt => opt.MapFrom(x => x.Site));
-        CreateMap<Site, OldSite>().ReverseMap();
+        CreateMap<Site, OldSite>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ReverseMap();
         CreateMap<Article, ArticleDto>()
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(x => x.Category.Id))
             .ReverseMap();

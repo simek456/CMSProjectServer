@@ -8,7 +8,7 @@ namespace CMSProjectServer.Domain.Dto.SiteContents;
 
 public class BaseComponentDto
 {
-    public virtual string Type { get => GetType().ToString(); }
+    public virtual string Type { get; set; }
     public string Id { get; set; }
     public decimal MarginTop { get; set; }
     public decimal MarginRight { get; set; }
