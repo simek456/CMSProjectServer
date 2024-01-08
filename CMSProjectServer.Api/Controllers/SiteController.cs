@@ -45,7 +45,7 @@ public class SiteController : ControllerBase
 
     [HttpDelete("{siteId}")]
     [Authorize(Roles = UserRoles.Admin)]
-    public async Task<IActionResult> SaveSite([FromRoute] string siteId)
+    public async Task<IActionResult> DeleteSite([FromRoute] string siteId)
     {
         var username = User?.Identity?.Name;
         if (username is null)

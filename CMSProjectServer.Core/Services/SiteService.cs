@@ -42,6 +42,7 @@ internal class SiteService : ISiteService
         }
         var siteEntity = mapper.Map<Site>(siteDto);
         siteEntity.ChangeAuthor = changeAuthor;
+        siteEntity.Name = siteId;
         siteEntity.CreatedAt = DateTime.UtcNow;
 
         var oldSite = await dbContext.CurrentSites.FirstOrDefaultAsync(x => x.Name == siteId);

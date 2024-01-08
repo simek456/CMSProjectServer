@@ -35,7 +35,7 @@ public class AccountController : ControllerBase
 
     [HttpDelete("admin")]
     [Authorize(Roles = UserRoles.Admin)]
-    public async Task<IActionResult> DeleteMyAccount([FromQuery] string targetAccount)
+    public async Task<IActionResult> DeleteAccount([FromQuery] string targetAccount)
     {
         var username = User?.Identity?.Name;
         if (username is null)

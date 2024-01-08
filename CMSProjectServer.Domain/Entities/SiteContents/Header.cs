@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Domain.Entities.SiteContents;
 
-public class Header
+public class Header : BaseComponent
 {
 }

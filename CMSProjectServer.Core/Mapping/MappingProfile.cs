@@ -25,7 +25,10 @@ public class MappingProfile : Profile
         CreateMap<ImageComponent, ImageComponentDto>().ReverseMap();
         CreateMap<MenuItem, MenuItemDto>().ReverseMap();
         CreateMap<Row, RowDto>().ReverseMap();
-        CreateMap<Site, SiteDto>().ReverseMap();
+        CreateMap<Site, SiteDto>()
+            .ForMember(dest => dest.Site, opt => opt.MapFrom(x => x.SiteContent))
+            .ReverseMap()
+            .ForMember(dest => dest.SiteContent, opt => opt.MapFrom(x => x.Site));
         CreateMap<Site, OldSite>().ReverseMap();
         CreateMap<Article, ArticleDto>()
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(x => x.Category.Id))

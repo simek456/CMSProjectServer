@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Domain.Dto.SiteContents;
 
-public class FooterDto
+public class FooterDto : BaseComponentDto
 {
 }
