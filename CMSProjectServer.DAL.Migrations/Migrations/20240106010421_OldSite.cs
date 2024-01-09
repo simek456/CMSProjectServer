@@ -1,5 +1,4 @@
-﻿using System;
-using CMSProjectServer.Domain.Entities.SiteContents;
+﻿using CMSProjectServer.Domain.Entities.SiteContents;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 

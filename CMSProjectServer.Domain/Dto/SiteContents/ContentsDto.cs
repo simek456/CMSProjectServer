@@ -1,15 +1,6 @@
-﻿using CMSProjectServer.Domain.Entities.SiteContents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace CMSProjectServer.Domain.Dto.SiteContents;
 
-namespace CMSProjectServer.Domain.Dto.SiteContents;
-
+//dummy class for migration
 public class ContentsDto
 {
-    public List<MenuItemDto> MenuItems { get; set; }
-    public FooterDto Footer { get; set; }
-    public HeaderDto Header { get; set; }
 }

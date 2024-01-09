@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMSProjectServer.Core.Services;
@@ -30,7 +29,7 @@ internal class SiteService : ISiteService
         {
             return Result<SiteDto>.Failure("Site not found");
         }
-        return mapper.Map<SiteDto>(site);
+        return new SiteDto() { Site = site.SiteContent };
     }
 
     public async Task AddSite(SiteDto siteDto, string siteId, string username)
@@ -40,9 +39,10 @@ internal class SiteService : ISiteService
         {
             return;
         }
-        var siteEntity = mapper.Map<Site>(siteDto);
+        var siteEntity = new Site();
         siteEntity.ChangeAuthor = changeAuthor;
         siteEntity.Name = siteId;
+        siteEntity.SiteContent = siteDto.Site;
         siteEntity.CreatedAt = DateTime.UtcNow;
 
         var oldSite = await dbContext.CurrentSites.FirstOrDefaultAsync(x => x.Name == siteId);
@@ -60,7 +60,9 @@ internal class SiteService : ISiteService
 
     private async Task AddHistoricSite(Site oldSite)
     {
-        dbContext.HistoricSites.Add(mapper.Map<OldSite>(oldSite));
+        var s = mapper.Map<OldSite>(oldSite);
+        s.SiteContent = oldSite.SiteContent;
+        dbContext.HistoricSites.Add(s);
     }
 
     public async Task<List<string>> GetAllSites()

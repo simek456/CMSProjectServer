@@ -1,6 +1,5 @@
-﻿using CMSProjectServer.Domain.Dto.SiteContents;
-using CMSProjectServer.Domain.Entities.SiteContents;
-using System;
+﻿using System;
+using System.Text.Json.Nodes;
 
 namespace CMSProjectServer.Domain.Entities;
 
@@ -8,7 +7,7 @@ public class Site
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public Contents SiteContent { get; set; }
+    public JsonObject SiteContent { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

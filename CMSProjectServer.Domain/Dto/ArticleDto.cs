@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CMSProjectServer.Domain.Dto;
+﻿namespace CMSProjectServer.Domain.Dto;
 
 public class ArticleDto
 {
