@@ -2,6 +2,6 @@
 
 public class IdTitlePairDto
 {
-    public int Id;
-    public string Title;
+    public int Id { get; set; }
+    public string Title { get; set; }
 }

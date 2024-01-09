@@ -122,10 +122,8 @@ internal class ArticleService : IArticleService
         var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
             .Select(x => new IdTitlePairDto() { Id = x.Id, Title = x.Title })
             .ToListAsync();
-        var result = new ArticleIdTitleMapDto()
-        {
-            Articles = articleList,
-        };
+        var result = new ArticleIdTitleMapDto();
+        result.Articles = articleList;
         return result;
     }
 
@@ -142,7 +140,7 @@ internal class ArticleService : IArticleService
 
     private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId)
     {
-        IQueryable<Article> query = dbContext.Articles;
+        IQueryable<Article> query = dbContext.Articles.Include(x => x.Author).Include(x => x.Category);
 
         if (categoryId != null)
         {
