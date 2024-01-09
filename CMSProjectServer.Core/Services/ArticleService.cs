@@ -22,15 +22,21 @@ internal class ArticleService : IArticleService
         this.mapper = mapper;
     }
 
-    public async Task<Result<ArticleDto>> GetArticleById(int id)
+    public async Task<Result<ArticleDto>> GetArticleById(int id, string? username)
     {
         var result = await dbContext.Articles.Include(x => x.Likes).Include(x => x.Category).FirstOrDefaultAsync(a => a.Id == id);
         if (result == null)
         {
             return Result<ArticleDto>.Failure();
         }
+        bool isLiked = false;
+        if (username != null)
+        {
+            isLiked = dbContext.Likes.Any(x => x.User.UserName == username);
+        }
         var article = mapper.Map<ArticleDto>(result);
         article.LikeCount = result.Likes.Count;
+        article.IsLiked = isLiked;
         return article;
     }
 

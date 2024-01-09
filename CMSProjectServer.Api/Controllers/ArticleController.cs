@@ -1,10 +1,14 @@
 ﻿using CMSProjectServer.Core.Services;
 using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CMSProjectServer.Api.Controllers;
 
@@ -20,9 +24,17 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetArticle([FromRoute] int id)
     {
-        var result = await articleService.GetArticleById(id);
+        string? username = null;
+        var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+        if (auth.Succeeded)
+        {
+            var claimsPrincipal = auth.Principal;
+            username = claimsPrincipal?.Identity?.Name;
+        }
+        var result = await articleService.GetArticleById(id, username);
         if (result.IsSuccess)
         {
             return Ok(result.Value);

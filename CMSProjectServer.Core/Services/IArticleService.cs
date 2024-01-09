@@ -11,7 +11,7 @@ public interface IArticleService
 
     Task DeleteArticles(List<int> articleIds);
 
-    Task<Result<ArticleDto>> GetArticleById(int id);
+    Task<Result<ArticleDto>> GetArticleById(int id, string? username);
 
     Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId);
 
