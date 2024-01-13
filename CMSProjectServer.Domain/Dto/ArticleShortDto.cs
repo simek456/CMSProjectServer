@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace CMSProjectServer.Domain.Dto;
 
@@ -10,4 +11,6 @@ public class ArticleShortDto
     public DateTime CreatedAt { get; set; }
     public int CategoryId { get; set; }
     public Guid AuthorId { get; set; }
+    public string AuthorName { get; set; }
+    public int LikeCount { get; set; }
 }

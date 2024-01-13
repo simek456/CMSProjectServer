@@ -9,4 +9,5 @@ public class ArticleDto
     public int CategoryId { get; set; }
     public int LikeCount { get; set; }
     public bool IsLiked { get; set; }
+    public string AutorName { get; set; }
 }

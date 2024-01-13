@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMSProjectServer.Core.DI.DIContainer">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="CMSProjectServer.Core.DI.DIContainer.CoreModule" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DI\DIContainer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>DI\DIContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMSProjectServer.Core.Mapping.MappingProfile">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\MappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.AccountService" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAQACAAAAAAAAAACAAAAAAQAAAAA=</HashCode>
+      <FileName>Services\AccountService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.ArticleService" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAQEIAAAAAIAIAAAQAAAAAAAAAAAAAABAAAAAAhAAA=</HashCode>
+      <FileName>Services\ArticleService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.AuthService" BaseTypeListCollapsed="true">
+    <Position X="10" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAEQAAAAgAA=</HashCode>
+      <FileName>Services\AuthService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.CategoriesService" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAQAAAAAAAQAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Services\CategoriesService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.LikeService" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Services\LikeService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.SiteService" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAIAQCgAQAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Services\SiteService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.CMSDbContext">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="CMSProjectServer.Core.Services.IAccountService">
+    <Position X="13.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAACAAAAAAQAAAAA=</HashCode>
+      <FileName>Services\IAccountService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.IArticleService">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEIAAAAAAAIAAAAAAAAAAAAAAAAAABAAAAAAhAAA=</HashCode>
+      <FileName>Services\IArticleService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.IAuthService">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>Services\IAuthService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ICategoriesService">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Services\ICategoriesService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ILikeService">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Services\ILikeService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ISiteService">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAACgAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Services\ISiteService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

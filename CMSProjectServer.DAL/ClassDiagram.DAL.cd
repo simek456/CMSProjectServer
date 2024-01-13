@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMSProjectServer.DAL.CMSDbContext">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAQAAAAAAAAAAABAAEAAIUAACAAAAAAAAIAA=</HashCode>
+      <FileName>CMSDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.ArticleCategoryEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\ArticleCategoryEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.ArticleEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\ArticleEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.CommentEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\CommentEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.LikeEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\LikeEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.OldSiteEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\OldSiteEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.SiteEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\SiteEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.DAL.EntityBuilders.UserEntityBuilder" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EntityBuilders\UserEntityBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

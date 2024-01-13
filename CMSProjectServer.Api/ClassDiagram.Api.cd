@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMSProjectServer.Api.Startup">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAIAAAAACAAAAAA=</HashCode>
+      <FileName>Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.AccountController">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAAQAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="accountService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.ArticleController">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAABAAIAAAAAAAAAAAQAAAAABFAAAAAgAAAA=</HashCode>
+      <FileName>Controllers\ArticleController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="articleService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.AuthenticationController">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAIAAAAAAABIAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AuthenticationController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="authService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.CategoryController">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAICAAAAAAAACAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CategoryController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="categoriesService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.LikeController">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Controllers\LikeController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="likeService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.SiteController">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgAAAAAAACgBAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\SiteController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="siteService" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="CMSProjectServer.Core.Services.ICategoriesService">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.IArticleService">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ILikeService">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.IAccountService" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ISiteService">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.IAuthService">
+    <Position X="13" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

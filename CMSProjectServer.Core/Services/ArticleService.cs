@@ -24,7 +24,7 @@ internal class ArticleService : IArticleService
 
     public async Task<Result<ArticleDto>> GetArticleById(int id, string? username)
     {
-        var result = await dbContext.Articles.Include(x => x.Likes).Include(x => x.Category).FirstOrDefaultAsync(a => a.Id == id);
+        var result = await dbContext.Articles.Include(x => x.Likes).Include(x => x.Category).Select(x => new { Author = x.Author.UserName, Article = x }).FirstOrDefaultAsync(a => a.Article.Id == id);
         if (result == null)
         {
             return Result<ArticleDto>.Failure();
@@ -34,20 +34,23 @@ internal class ArticleService : IArticleService
         {
             isLiked = dbContext.Likes.Any(x => x.User.UserName == username);
         }
-        var article = mapper.Map<ArticleDto>(result);
-        article.LikeCount = result.Likes.Count;
+        var article = mapper.Map<ArticleDto>(result.Article);
+        article.LikeCount = result.Article.Likes.Count;
         article.IsLiked = isLiked;
+        article.AutorName = result.Author;
         return article;
     }
 
     public async Task<Result<ArticleShortDto>> GetArticleShortById(int id)
     {
-        var result = await dbContext.Articles.Include(x => x.Author).Include(x => x.Category).FirstOrDefaultAsync(a => a.Id == id);
+        var result = await dbContext.Articles.Include(x => x.Author).Include(x => x.Category).Select(x => new { LikeCount = x.Likes.Count, Article = x }).FirstOrDefaultAsync(a => a.Article.Id == id);
         if (result == null)
         {
             return Result<ArticleShortDto>.Failure();
         }
-        var article = mapper.Map<ArticleShortDto>(result);
+        var article = mapper.Map<ArticleShortDto>(result.Article);
+        article.AuthorName = result.Article.Author.UserName;
+        article.LikeCount = result.LikeCount;
         return article;
     }
 
@@ -130,10 +133,17 @@ internal class ArticleService : IArticleService
     public async Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId)
     {
         var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
+            .Select(x => new { Article = x, LikeCount = x.Likes.Count })
             .ToListAsync();
         var result = new ArticleListDto()
         {
-            Articles = articleList.Select(x => mapper.Map<ArticleShortDto>(x)).ToList(),
+            Articles = articleList.Select(x =>
+            {
+                var dto = mapper.Map<ArticleShortDto>(x.Article);
+                dto.AuthorName = x.Article.Author.UserName;
+                dto.LikeCount = x.LikeCount;
+                return dto;
+            }).ToList(),
         };
         return result;
     }

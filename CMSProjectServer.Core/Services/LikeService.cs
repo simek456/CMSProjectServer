@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMSProjectServer.Core.Services;
 
-public class LikeService : ILikeService
+internal class LikeService : ILikeService
 {
     private readonly CMSDbContext dbContext;
 
