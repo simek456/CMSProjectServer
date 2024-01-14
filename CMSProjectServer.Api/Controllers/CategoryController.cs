@@ -31,7 +31,12 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> CreateCategory([FromBody] NewCategoryDto newCategory)
     {
         var result = await categoriesService.AddCategory(newCategory.Category);
-        return Ok(result);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+        return BadRequest(result.Error);
     }
 
     [HttpDelete()]
