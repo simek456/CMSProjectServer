@@ -1,4 +1,5 @@
 ﻿using CMSProjectServer.DAL;
+using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -26,8 +27,12 @@ internal class CategoriesService : ICategoriesService
         return response;
     }
 
-    public async Task<NewCategoryResponseDto> AddCategory(string categoryName)
+    public async Task<Result<NewCategoryResponseDto>> AddCategory(string categoryName)
     {
+        if (await dbContext.Categories.AnyAsync(x => x.Category == categoryName))
+        {
+            return Result<NewCategoryResponseDto>.Failure("Duplicate category");
+        }
         var category = new Domain.Entities.ArticleCategory { Category = categoryName };
         dbContext.Categories.Add(category);
         await dbContext.SaveChangesAsync();

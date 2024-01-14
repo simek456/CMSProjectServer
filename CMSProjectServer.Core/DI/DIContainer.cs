@@ -41,6 +41,9 @@ public sealed class DIContainer
             builder.RegisterType<AccountService>()
                 .As<IAccountService>()
                 .InstancePerDependency();
+            builder.RegisterType<CommentService>()
+                .As<ICommentService>()
+                .InstancePerDependency();
         }
     }
 }

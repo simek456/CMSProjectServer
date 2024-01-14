@@ -60,7 +60,6 @@
     <ShowAsAssociation>
       <Field Name="dbContext" />
     </ShowAsAssociation>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CMSProjectServer.Core.Services.LikeService" BaseTypeListCollapsed="true">
     <Position X="6.75" Y="4" Width="1.5" />
