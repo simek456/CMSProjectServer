@@ -14,9 +14,9 @@ public class CategoryController : ControllerBase
 {
     private readonly ICategoriesService categoriesService;
 
-    public CategoryController(ICategoriesService articleService)
+    public CategoryController(ICategoriesService categoryService)
     {
-        this.categoriesService = articleService;
+        this.categoriesService = categoryService;
     }
 
     [HttpGet]
