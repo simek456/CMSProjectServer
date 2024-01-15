@@ -120,9 +120,9 @@ internal class ArticleService : IArticleService
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    public async Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
     {
-        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title)
             .Select(x => new IdTitlePairDto() { Id = x.Id, Title = x.Title })
             .ToListAsync();
         var result = new ArticleIdTitleMapDto();
@@ -130,9 +130,9 @@ internal class ArticleService : IArticleService
         return result;
     }
 
-    public async Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    public async Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
     {
-        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId)
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title)
             .Select(x => new { Article = x, LikeCount = x.Likes.Count })
             .ToListAsync();
         var result = new ArticleListDto()
@@ -148,7 +148,7 @@ internal class ArticleService : IArticleService
         return result;
     }
 
-    private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId)
+    private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
     {
         IQueryable<Article> query = dbContext.Articles.Include(x => x.Author).Include(x => x.Category);
 
@@ -159,6 +159,10 @@ internal class ArticleService : IArticleService
         if (authorId != null)
         {
             query = query.Where(x => x.Author.Id == authorId);
+        }
+        if (title != null)
+        {
+            query = query.Where(x => EF.Functions.ILike(x.Title, $"%{title}%"));
         }
         if (page != null)
         {

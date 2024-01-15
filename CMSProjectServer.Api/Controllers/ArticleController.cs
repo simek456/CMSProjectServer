@@ -99,25 +99,25 @@ public class ArticleController : ControllerBase
     }
 
     [HttpGet("id-title-map/{pageSize}")]
-    public async Task<IActionResult> GetArticleListMap([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId)
+    public async Task<IActionResult> GetArticleListMap([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId, [FromQuery] string? title)
     {
         if (!ValidSorting(order))
         {
             return BadRequest("Incorrect Sorting type");
         }
 
-        var result = await articleService.GetArticleIdNameMap(pageSize, page, categoryId, order, authorId);
+        var result = await articleService.GetArticleIdNameMap(pageSize, page, categoryId, order, authorId, title);
         return Ok(result);
     }
 
     [HttpGet("list/{pageSize}")]
-    public async Task<IActionResult> GetArticleListShort([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId)
+    public async Task<IActionResult> GetArticleListShort([FromRoute] int pageSize, [FromQuery] int? page, [FromQuery] int? categoryId, [FromQuery] string? order, [FromQuery] string? authorId, [FromQuery] string? title)
     {
         if (!ValidSorting(order))
         {
             return BadRequest("Incorrect Sorting type");
         }
-        var result = await articleService.GetArticleListShort(pageSize, page, categoryId, order, authorId);
+        var result = await articleService.GetArticleListShort(pageSize, page, categoryId, order, authorId, title);
         return Ok(result);
     }
 

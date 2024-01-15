@@ -13,9 +13,9 @@ public interface IArticleService
 
     Task<Result<ArticleDto>> GetArticleById(int id, string? username);
 
-    Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId);
+    Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title);
 
-    Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId);
+    Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title);
 
     Task<Result<ArticleShortDto>> GetArticleShortById(int id);
 
