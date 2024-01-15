@@ -29,17 +29,17 @@ public class CommentService : ICommentService
         return new CommentListDto() { CommentList = comments };
     }
 
-    public async Task<Result<bool>> AddComment(int articleId, string username, CommentDto comment)
+    public async Task<Result<int>> AddComment(int articleId, string username, CommentDto comment)
     {
         var article = await dbContext.Articles.FirstOrDefaultAsync(x => x.Id == articleId);
         if (article == null)
         {
-            return Result<bool>.Failure("Article doesnt exist");
+            return Result<int>.Failure("Article doesnt exist");
         }
         var user = await dbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
         if (user == null)
         {
-            return Result<bool>.Failure("User doesnt exist");
+            return Result<int>.Failure("User doesnt exist");
         }
         var commentEntity = new Comment()
         {
@@ -50,24 +50,24 @@ public class CommentService : ICommentService
         };
         dbContext.Add(commentEntity);
         await dbContext.SaveChangesAsync();
-        return true;
+        return commentEntity.Id;
     }
 
-    public async Task<Result<bool>> EditComment(int articleId, string username, CommentDto comment)
+    public async Task<Result<int>> EditComment(int articleId, string username, CommentDto comment)
     {
         var commentEntity = await dbContext.Comments.Include(x => x.Author).FirstOrDefaultAsync(x => x.Id == comment.Id);
         if (commentEntity is null)
         {
-            return Result<bool>.Failure("comment doesnt exist");
+            return Result<int>.Failure("comment doesnt exist");
         }
         if (commentEntity.Author.UserName != username)
         {
-            return Result<bool>.Failure("You are not the author!");
+            return Result<int>.Failure("You are not the author!");
         }
         commentEntity.UpdatedAt = DateTime.UtcNow;
         commentEntity.Contents = comment.Contents;
         await dbContext.SaveChangesAsync();
-        return true;
+        return commentEntity.Id;
     }
 
     public async Task<bool> RemoveComment(int commentId, string username, bool isAdmin = false)
