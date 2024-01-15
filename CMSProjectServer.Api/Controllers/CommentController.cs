@@ -22,6 +22,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet("{articleId}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetArticleComments([FromRoute] int articleId)
     {
         var result = await commentService.GetCommentsForArticle(articleId);
@@ -72,8 +73,8 @@ public class CommentController : ControllerBase
         return BadRequest(result.Error);
     }
 
-    [HttpDelete("{articleId}")]
-    public async Task<IActionResult> DeleteComment([FromBody] CommentDto commentDto, [FromRoute] int articleId)
+    [HttpDelete("{commentId}")]
+    public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
     {
         string? username = null;
         var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
@@ -86,7 +87,7 @@ public class CommentController : ControllerBase
         {
             return BadRequest("Unknown user");
         }
-        var result = await commentService.RemoveComment(articleId, username);
+        var result = await commentService.RemoveComment(commentId, username);
         if (result)
         {
             return Ok();
@@ -95,8 +96,8 @@ public class CommentController : ControllerBase
     }
 
     [Authorize(Roles = UserRoles.Admin)]
-    [HttpDelete("{articleId}/admin")]
-    public async Task<IActionResult> DeleteCommentAdmin([FromBody] CommentDto commentDto, [FromRoute] int articleId)
+    [HttpDelete("{commentId}/admin")]
+    public async Task<IActionResult> DeleteCommentAdmin([FromRoute] int commentId)
     {
         string? username = null;
         var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
@@ -109,7 +110,7 @@ public class CommentController : ControllerBase
         {
             return BadRequest("Unknown user");
         }
-        var result = await commentService.RemoveComment(articleId, username, true);
+        var result = await commentService.RemoveComment(commentId, username, true);
         if (result)
         {
             return Ok();

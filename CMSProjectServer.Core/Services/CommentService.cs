@@ -43,7 +43,7 @@ public class CommentService : ICommentService
         }
         var commentEntity = new Comment()
         {
-            CreatedAt = DateTime.Now,
+            CreatedAt = DateTime.UtcNow,
             Article = article,
             Author = user,
             Contents = comment.Contents,
@@ -64,7 +64,7 @@ public class CommentService : ICommentService
         {
             return Result<bool>.Failure("You are not the author!");
         }
-        commentEntity.UpdatedAt = DateTime.Now;
+        commentEntity.UpdatedAt = DateTime.UtcNow;
         commentEntity.Contents = comment.Contents;
         await dbContext.SaveChangesAsync();
         return true;
