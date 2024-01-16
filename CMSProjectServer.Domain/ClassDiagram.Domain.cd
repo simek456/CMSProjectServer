@@ -38,7 +38,7 @@
   <Class Name="CMSProjectServer.Domain.Dto.ArticleIdTitleMapDto">
     <Position X="9.75" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dto\ArticleIdTitleMapDto.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -49,13 +49,13 @@
     <Position X="15.5" Y="0.5" Width="1.5" />
     <AssociationLine Name="Articles" Type="CMSProjectServer.Domain.Dto.ArticleShortDto" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="16.312" Y="1.368" />
+        <Point X="16.312" Y="1.603" />
         <Point X="16.312" Y="4.501" />
         <Point X="15.25" Y="4.501" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dto\ArticleListDto.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -152,11 +152,11 @@
   <Class Name="CMSProjectServer.Domain.Entities.ArticleCategory">
     <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Entities\ArticleCategory.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Article" />
+      <Property Name="Articles" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CMSProjectServer.Domain.Entities.Comment">

@@ -55,7 +55,13 @@ public class ArticleController : ControllerBase
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> CreateArticle([FromBody] ArticleDto articleDto)
     {
-        var username = User?.Identity?.Name;
+        string? username = null;
+        var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+        if (auth.Succeeded)
+        {
+            var claimsPrincipal = auth.Principal;
+            username = claimsPrincipal?.Identity?.Name;
+        }
         if (username is null)
         {
             return BadRequest("Unknown User");
@@ -73,7 +79,13 @@ public class ArticleController : ControllerBase
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> UpdateArticle([FromBody] ArticleDto articleDto, [FromRoute] int id)
     {
-        var username = User?.Identity?.Name;
+        string? username = null;
+        var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+        if (auth.Succeeded)
+        {
+            var claimsPrincipal = auth.Principal;
+            username = claimsPrincipal?.Identity?.Name;
+        }
         if (username is null)
         {
             return BadRequest("Unknown User");

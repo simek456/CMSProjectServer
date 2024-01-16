@@ -66,7 +66,7 @@ internal class ArticleService : IArticleService
             return Result<CreateArticleResponseDto>.Failure("User doesn't exist");
         }
         var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.CategoryId);
-        if (category == null)
+        if (category == null && articleDto.CategoryId != null)
         {
             return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");
         }
@@ -97,7 +97,7 @@ internal class ArticleService : IArticleService
             return Result<CreateArticleResponseDto>.Failure("You are not the author");
         }
         var category = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == articleDto.CategoryId);
-        if (category == null)
+        if (category == null && articleDto.CategoryId != null)
         {
             return Result<CreateArticleResponseDto>.Failure("Category doesn't exist");
         }
@@ -122,17 +122,18 @@ internal class ArticleService : IArticleService
 
     public async Task<ArticleIdTitleMapDto> GetArticleIdNameMap(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
     {
-        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title)
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title, out var totalCount)
             .Select(x => new IdTitlePairDto() { Id = x.Id, Title = x.Title })
             .ToListAsync();
         var result = new ArticleIdTitleMapDto();
         result.Articles = articleList;
+        result.TotalArticlecount = totalCount;
         return result;
     }
 
     public async Task<ArticleListDto> GetArticleListShort(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
     {
-        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title)
+        var articleList = await GetArticleListQuery(pageSize, page, categoryId, order, authorId, title, out var totalCount)
             .Select(x => new { Article = x, LikeCount = x.Likes.Count })
             .ToListAsync();
         var result = new ArticleListDto()
@@ -144,11 +145,12 @@ internal class ArticleService : IArticleService
                 dto.LikeCount = x.LikeCount;
                 return dto;
             }).ToList(),
+            TotalArticleCount = totalCount
         };
         return result;
     }
 
-    private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title)
+    private IQueryable<Article> GetArticleListQuery(int pageSize, int? page, int? categoryId, string? order, string? authorId, string? title, out int totalCount)
     {
         IQueryable<Article> query = dbContext.Articles.Include(x => x.Author).Include(x => x.Category);
 
@@ -164,6 +166,7 @@ internal class ArticleService : IArticleService
         {
             query = query.Where(x => EF.Functions.ILike(x.Title, $"%{title}%"));
         }
+        totalCount = query.Count();
         if (page != null)
         {
             query = query.Skip(pageSize * page.Value);

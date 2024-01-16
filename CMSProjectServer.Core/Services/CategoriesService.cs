@@ -41,7 +41,11 @@ internal class CategoriesService : ICategoriesService
 
     public async Task DeleteCategories(List<int> Ids)
     {
-        var existing = await dbContext.Categories.Where(x => Ids.Contains(x.Id)).ToListAsync();
+        var existing = await dbContext.Categories.Include(x => x.Articles).Where(x => Ids.Contains(x.Id)).ToListAsync();
+        foreach (var article in existing.SelectMany(x => x.Articles))
+        {
+            article.Category = null;
+        }
         dbContext.RemoveRange(existing);
         await dbContext.SaveChangesAsync();
     }

@@ -1,6 +1,8 @@
 ﻿using CMSProjectServer.Core.Services;
 using CMSProjectServer.Domain;
 using CMSProjectServer.Domain.Dto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -33,7 +35,13 @@ public class SiteController : ControllerBase
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> SaveSite([FromRoute] string siteId, [FromBody] SiteDto siteDto)
     {
-        var username = User?.Identity?.Name;
+        string? username = null;
+        var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+        if (auth.Succeeded)
+        {
+            var claimsPrincipal = auth.Principal;
+            username = claimsPrincipal?.Identity?.Name;
+        }
         if (username is null)
         {
             return BadRequest("Unknown User");
@@ -46,7 +54,13 @@ public class SiteController : ControllerBase
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> DeleteSite([FromRoute] string siteId)
     {
-        var username = User?.Identity?.Name;
+        string? username = null;
+        var auth = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+        if (auth.Succeeded)
+        {
+            var claimsPrincipal = auth.Principal;
+            username = claimsPrincipal?.Identity?.Name;
+        }
         if (username is null)
         {
             return BadRequest("Unknown User");
