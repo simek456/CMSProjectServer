@@ -1,10 +1,10 @@
 ﻿using CMSProjectServer.Domain;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CMSProjectServer.Core.Services;
 
 public interface ITweetService
 {
-    Task<Result<JObject>> GetTweet(string url);
+    Task<Result<JsonDocument>> GetTweet(string url);
 }
