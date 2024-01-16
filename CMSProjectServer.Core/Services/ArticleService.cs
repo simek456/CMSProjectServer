@@ -167,11 +167,6 @@ internal class ArticleService : IArticleService
             query = query.Where(x => EF.Functions.ILike(x.Title, $"%{title}%"));
         }
         totalCount = query.Count();
-        if (page != null)
-        {
-            query = query.Skip(pageSize * page.Value);
-        }
-        query = query.Take(pageSize);
         switch (order)
         {
             case SortingType.NameDescending:
@@ -200,6 +195,11 @@ internal class ArticleService : IArticleService
 
             default: break;
         }
+        if (page != null)
+        {
+            query = query.Skip(pageSize * page.Value);
+        }
+        query = query.Take(pageSize);
         return query;
     }
 }
