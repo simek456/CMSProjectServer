@@ -36,7 +36,10 @@ internal class AccountService : IAccountService
                 return Result<bool>.Failure("Can't delete last admin");
             }
         }
-        await userManager.DeleteAsync(user);
+        var userInDb = await dbContext.Users.Include(x => x.Articles).Include(x => x.Likes).Include(x => x.EditedSites).Include(x => x.Comments).FirstAsync(x => x.UserName == username);
+        userInDb.EditedSites.ForEach(x => x.ChangeAuthor = null);
+        dbContext.Remove(userInDb);
+        await dbContext.SaveChangesAsync();
         return true;
     }
 

@@ -67,6 +67,26 @@
       <Field Name="siteService" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.CommentController">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAAAAAAAAAAAEIAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Controllers\CommentController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="commentService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CMSProjectServer.Api.Controllers.TweetController">
+    <Position X="7.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Controllers\TweetController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="tweetService" />
+    </ShowAsAssociation>
+  </Class>
   <Interface Name="CMSProjectServer.Core.Services.ICategoriesService">
     <Position X="10.5" Y="3.75" Width="1.5" />
     <TypeIdentifier />
@@ -89,6 +109,14 @@
   </Interface>
   <Interface Name="CMSProjectServer.Core.Services.IAuthService">
     <Position X="13" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ICommentService">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ITweetService">
+    <Position X="10.75" Y="5.75" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />

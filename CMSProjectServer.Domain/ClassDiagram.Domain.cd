@@ -234,5 +234,19 @@
     <Position X="6" Y="1.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
+  <Class Name="CMSProjectServer.Domain.Dto.CommentDto">
+    <Position X="19.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAABAAAA=</HashCode>
+      <FileName>Dto\CommentDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMSProjectServer.Domain.Dto.CommentListDto">
+    <Position X="17.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dto\CommentListDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -44,7 +44,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CMSProjectServer.Core.Services.AuthService" BaseTypeListCollapsed="true">
-    <Position X="10" Y="3" Width="1.5" />
+    <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAEQAAAAgAA=</HashCode>
       <FileName>Services\AuthService.cs</FileName>
@@ -60,6 +60,7 @@
     <ShowAsAssociation>
       <Field Name="dbContext" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CMSProjectServer.Core.Services.LikeService" BaseTypeListCollapsed="true">
     <Position X="6.75" Y="4" Width="1.5" />
@@ -86,6 +87,25 @@
   <Class Name="CMSProjectServer.DAL.CMSDbContext">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.CommentService" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBAAAAAAAAQAAAAAAAEAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CommentService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMSProjectServer.Core.Services.TweetService" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAA=</HashCode>
+      <FileName>Services\TweetService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="CMSProjectServer.Core.Services.IAccountService">
     <Position X="13.75" Y="2.25" Width="1.5" />
@@ -127,6 +147,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAACgAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>Services\ISiteService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ICommentService">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBAAAAAAAAAAAAAAAAEAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ICommentService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMSProjectServer.Core.Services.ITweetService">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Services\ITweetService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
