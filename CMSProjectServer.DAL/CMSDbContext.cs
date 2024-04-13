@@ -3,11 +3,14 @@ using CMSProjectServer.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CMSProjectServer.DAL;
 
 public class CMSDbContext : IdentityDbContext<User>
 {
+    private readonly IConfiguration configuration;
+
     public DbSet<Article> Articles { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
@@ -15,9 +18,14 @@ public class CMSDbContext : IdentityDbContext<User>
     public DbSet<Site> CurrentSites { get; set; }
     public DbSet<OldSite> HistoricSites { get; set; }
 
+    public CMSDbContext(IConfiguration configuration)
+    {
+        this.configuration = configuration;
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Database=CMSProjectDatabase;Username=CMSProjectServer;Password=CMSProjectServer", x => x.MigrationsAssembly("CMSProjectServer.DAL.Migrations"));
+        optionsBuilder.UseNpgsql(configuration["DB_CONNECTION_STRING"], x => x.MigrationsAssembly("CMSProjectServer.DAL.Migrations"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
